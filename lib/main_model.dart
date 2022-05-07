@@ -1,16 +1,18 @@
 import 'package:flutter/material.dart';
 
 class MainModel extends ChangeNotifier {
-  // Constructor NOP
+  /// コンストラクタ NOP
   MainModel();
 
   int pushCounter = 0;
 
+  /// カウンタをインクリメントするメソッド
   void incrementCounter() {
     pushCounter++;
     notifyListeners();
   }
 
+  /// カウンタをデクリメントするメソッド
   void decrementCounter() {
     pushCounter--;
     notifyListeners();

@@ -17,13 +17,16 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: ChangeNotifierProvider<MainModel>(
+      // 変更通知提供者で包括し、変更監視対象はMainModelとする
+      home: ChangeNotifierProvider<MainModel>(  // from Widget
+        // 変更監視対象のインスタンスを作成する
         create: (_) => MainModel(),
         child: Scaffold(
           appBar: AppBar(
             title: const Text('Flutter Demo Provider'),
           ),
-          body: Consumer<MainModel>(
+          // 変更通知先である顧客を用意し、変更監視対象はMainModelとする
+          body: Consumer<MainModel>(  // from StreamBuilder
             builder: (context, model, child) {
               return Center(
                 child: Column(
@@ -33,6 +36,7 @@ class MyApp extends StatelessWidget {
                       'You have pushed the button this many times:',
                     ),
                     Text(
+                      // 変更監視対象のmodelのカウンタを表示する
                       model.pushCounter.toString(),
                       style: Theme.of(context).textTheme.headline4,
                     ),
@@ -40,12 +44,14 @@ class MyApp extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         FloatingActionButton(
+                          // 押下時、変更監視対象のmodelのメソッドを実行する
                           onPressed: model.decrementCounter,
                           tooltip: 'Decrement',
                           child: const Icon(Icons.remove),
                           backgroundColor: Colors.red,
                         ),
                         FloatingActionButton(
+                          // 押下時、変更監視対象のmodelのメソッドを実行する
                           onPressed: model.incrementCounter,
                           tooltip: 'Increment',
                           child: const Icon(Icons.add),
